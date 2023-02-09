@@ -1,0 +1,25 @@
+server:
+  port: 8089
+spring:
+  application:
+    name: product-service
+    
+  # DATA
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:3306/product
+    username: root
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        ddl-auto: create
+        dialect: org.hibernate.dialect.MySQLDialect
+
+# DOC
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
