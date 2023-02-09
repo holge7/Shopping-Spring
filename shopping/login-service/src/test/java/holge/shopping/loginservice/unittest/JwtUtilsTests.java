@@ -105,6 +105,7 @@ public class JwtUtilsTests {
 	public void validate_jwt() {
 		String jwt = jwtUtils.generateJwtToken(userDTO);
 		boolean isValid = jwtUtils.validateJwtToken(jwt);
+		System.out.println(isValid);
 		assertTrue(isValid);
 	}
 	
