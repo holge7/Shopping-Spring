@@ -23,6 +23,18 @@ import commons.dto.ApiResponse;
 public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 	Logger log = LoggerFactory.getLogger(getClass());
 	
+	
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<ApiResponse> handleException(UserNotFoundException e){
+		ApiResponse response = new ApiResponse(e.getMessage());
+
+		return new ResponseEntity<>(
+			response, 
+			e.getHttpStatus()
+		);
+
+	}
+	
 	@ExceptionHandler(RolNotFoundException.class)
 	public ResponseEntity<ApiResponse> handleException(RolNotFoundException e){
 		ApiResponse response = new ApiResponse(e.getMessage());
