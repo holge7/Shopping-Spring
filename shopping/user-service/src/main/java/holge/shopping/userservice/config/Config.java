@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 
 @Configuration
-@ComponentScan({"commons.jwt"})
+@ComponentScan({"commons.*"})
 public class Config {
 	
 	@Bean
