@@ -50,6 +50,12 @@ public class LoginService {
 		return jwtUtils.getUserFromJwt(jwt);
 	}
 	
+	/**
+	 * Authenticate a user by her email and password, then create a JWT 
+	 * @param email
+	 * @param password
+	 * @return ApiResponse<LoginResponse>
+	 */
 	public ApiResponse login(String email, String password) {
 		
 		HashMap<String, String> user = new HashMap<>();
