@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import commons.dto.ApiResponse;
@@ -20,12 +21,21 @@ public class LoginControllerImpl implements LoginController {
 		this.loginService = loginService;
 	}
 
-	@PostMapping("login")
+	@PostMapping("security/login")
 	public ResponseEntity<ApiResponse> login(
 			@RequestBody String email,
 			@RequestBody String password) {
 		return new ResponseEntity<ApiResponse>(
 					loginService.login(email, password),
+					HttpStatus.OK
+				);
+	}
+	
+	@PostMapping("security/valid")
+	public ResponseEntity<ApiResponse> validateJWT(
+			@RequestParam String jwt) {
+		return new ResponseEntity<ApiResponse>(
+					loginService.validJwt(jwt),
 					HttpStatus.OK
 				);
 	}

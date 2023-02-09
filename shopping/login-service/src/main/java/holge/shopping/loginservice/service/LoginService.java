@@ -37,8 +37,9 @@ public class LoginService {
 	 * @param jwt
 	 * @return
 	 */
-	public boolean validJwt(String jwt) {
-		return jwtUtils.validateJwtToken(jwt);		
+	public ApiResponse validJwt(String jwt) {
+		boolean isValid = jwtUtils.validateJwtToken(jwt);
+		return new ApiResponse(false, "", isValid);
 	}
 
 	/**

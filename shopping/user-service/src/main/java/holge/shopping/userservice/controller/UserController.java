@@ -2,6 +2,7 @@ package holge.shopping.userservice.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import commons.dto.UserDTO;
 import holge.shopping.userservice.dto.LoginRequest;
@@ -40,7 +41,7 @@ public interface UserController {
 
 	@Operation(
 			summary = "Register a new user", 
-			description = "If user is register without `ROL` he will be a USER", 
+			description = "Endpoint to register as user", 
 			responses = {
 					@ApiResponse(
 							responseCode = "200", 
@@ -60,6 +61,9 @@ public interface UserController {
 							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class)))
 					}
 			)
-	public ResponseEntity<commons.dto.ApiResponse> register(@RequestBody RegisterRequest registerRequest) throws Exception;
+	public ResponseEntity<commons.dto.ApiResponse> register(
+			@RequestParam String name,
+			@RequestParam String email,
+			@RequestParam String password) throws Exception;
 	
 }
