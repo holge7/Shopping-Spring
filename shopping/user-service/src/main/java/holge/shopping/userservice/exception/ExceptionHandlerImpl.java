@@ -2,6 +2,7 @@ package holge.shopping.userservice.exception;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,8 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import commons.dto.ApiResponse;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
@@ -55,16 +58,21 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 			e.getHttpStatus()
 		);
 
-	}
+	} //ConstraintViolationException
 	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ApiResponse> handleException(Exception e){
-		ApiResponse response = new ApiResponse(e.getMessage());
-
-		return new ResponseEntity<ApiResponse>(
-			response, 
-			HttpStatus.INTERNAL_SERVER_ERROR
-		);
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<ApiResponse> handleException(ConstraintViolationException ex){
+		Map<String, String> errors = new HashMap<>();
+		ex.getConstraintViolations().forEach(v -> {
+			errors.put(v.getPropertyPath().toString(), v.getMessage());
+		});
+		
+		ApiResponse response = new ApiResponse(true, "", errors);
+		
+		return new ResponseEntity<>(
+					response,
+					HttpStatus.BAD_REQUEST
+				);		
 
 	}
 	
@@ -73,7 +81,7 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 			MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		Map<String, String> errors = new HashMap<>();
 		((BindException) ex).getBindingResult().getAllErrors()
-			.forEach((error) -> {
+			.forEach(error -> {
 				String name = ((FieldError) error).getField();
 				String msg = error.getDefaultMessage();
 				errors.put(name, msg);
@@ -85,6 +93,21 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 					response,
 					HttpStatus.BAD_REQUEST
 				);		
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ApiResponse> handleException(Exception e){
+		System.out.println("=================");
+		System.out.println("Por aqui");
+		System.out.println("=================");
+		System.out.println(e);
+		ApiResponse response = new ApiResponse(e.getMessage());
+
+		return new ResponseEntity<ApiResponse>(
+			response, 
+			HttpStatus.INTERNAL_SERVER_ERROR
+		);
+
 	}
 
 
