@@ -1,6 +1,7 @@
 package holge.shopping.userservice.config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.Gson;
 
 @Configuration
-@ComponentScan({"commons.jwt"})
+@ComponentScan({"commons.*"})
 public class Config {
 	
 	@Bean
@@ -31,6 +32,7 @@ public class Config {
 	}
 	
 	@Bean
+	@LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
