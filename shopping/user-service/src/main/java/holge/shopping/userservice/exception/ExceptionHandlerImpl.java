@@ -2,7 +2,6 @@ package holge.shopping.userservice.exception;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,6 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import commons.dto.ApiResponse;
-import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
@@ -97,10 +95,6 @@ public class ExceptionHandlerImpl extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<ApiResponse> handleException(Exception e){
-		System.out.println("=================");
-		System.out.println("Por aqui");
-		System.out.println("=================");
-		System.out.println(e);
 		ApiResponse response = new ApiResponse(e.getMessage());
 
 		return new ResponseEntity<ApiResponse>(
