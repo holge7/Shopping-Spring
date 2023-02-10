@@ -15,7 +15,7 @@ import holge.shopping.userservice.service.UserService;
 
 @RestController
 @RequestMapping("api/admin/user")
-public class UserControllerAdminImpl {
+public class UserControllerAdminImpl implements UserControllerAdmin {
 	UserService userService;
 	
 	public UserControllerAdminImpl(UserService userService) {
