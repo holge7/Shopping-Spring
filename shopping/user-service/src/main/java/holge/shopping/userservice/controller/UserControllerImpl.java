@@ -34,7 +34,7 @@ public class UserControllerImpl implements UserController{
 				);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("")
 	public ResponseEntity<ApiResponse> register(
 				@RequestParam String name,
 				@RequestParam String email,
