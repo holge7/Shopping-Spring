@@ -12,6 +12,7 @@ import commons.dto.ApiResponse;
 import holge.shopping.userservice.dto.LoginRequest;
 import holge.shopping.userservice.dto.RegisterRequest;
 import holge.shopping.userservice.service.UserService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
 @RequestMapping("api/user")
@@ -25,6 +26,7 @@ public class UserControllerImpl implements UserController{
 
 	
 	@PostMapping("/login")
+	@CircuitBreaker(name = "default")
 	public ResponseEntity<ApiResponse> login(@RequestBody LoginRequest login) {
 		ApiResponse response = new ApiResponse(false, "", userService.login(login.getEmail(), login.getPassword()));
 	
@@ -34,7 +36,7 @@ public class UserControllerImpl implements UserController{
 				);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("")
 	public ResponseEntity<ApiResponse> register(
 				@RequestParam String name,
 				@RequestParam String email,

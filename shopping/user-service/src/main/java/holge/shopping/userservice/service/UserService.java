@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import commons.dto.ApiResponse;
 import commons.dto.UserDTO;
 import commons.enums.ERol;
 import holge.shopping.userservice.entity.Rol;
@@ -54,6 +55,24 @@ public class UserService {
 		// Throw user not foud to dont share if the error is from the email or password
 		throw new UserNotFoundException(email);
 		
+	}
+	
+	/**
+	 * Delete a user by id
+	 * @param id
+	 * @return
+	 */
+	public ApiResponse delete(Long id) {
+		
+		boolean exists = userRepository.existsById(id);
+		
+		if (!exists) {
+			throw new UserNotFoundException(id.toString());
+		}
+		
+		userRepository.deleteById(id);
+		
+		return new ApiResponse(false, "", null);
 	}
 	
 	/**
