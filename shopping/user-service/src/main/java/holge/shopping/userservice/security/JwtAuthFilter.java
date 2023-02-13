@@ -21,6 +21,8 @@ import com.google.gson.Gson;
 
 import commons.dto.ApiResponse;
 import commons.jwt.JwtUtils;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 import java.io.IOException;
 import java.util.HashMap;
 
