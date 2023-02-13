@@ -5,42 +5,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import commons.dto.UserDTO;
-import holge.shopping.userservice.dto.LoginRequest;
+import holge.shopping.userservice.dto.RegisterRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-public interface UserController {
+public interface UserControllerAdmin {
 	
 	@Operation(
-			summary = "Login with `email` and `password`", 
-			description = "Returns userDTO", 
-			responses = {
-					@ApiResponse(
-							responseCode = "200", 
-							description = "Returns `userDTO`",
-							content = @Content(schema = @Schema(implementation = UserDTO.class))),
-					@ApiResponse(
-							responseCode = "400", 
-							description = "Invalid request", 
-							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class))),
-					@ApiResponse(
-							responseCode = "404", 
-							description = "User not found", 
-							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class))),
-					@ApiResponse(
-							responseCode = "500", 
-							description = "Internal server error", 
-							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class)))
-					}
-			)
-	public ResponseEntity<commons.dto.ApiResponse> login(@RequestBody LoginRequest loginRequest);
-	
-
-	@Operation(
-			summary = "Register a new user", 
-			description = "Endpoint to register as user", 
+			summary = "Register a new user with any rol", 
+			description = "Endpoint to register user for admins users", 
 			responses = {
 					@ApiResponse(
 							responseCode = "200", 
@@ -61,8 +36,33 @@ public interface UserController {
 					}
 			)
 	public ResponseEntity<commons.dto.ApiResponse> register(
-			@RequestParam String name,
-			@RequestParam String email,
-			@RequestParam String password) throws Exception;
+			@RequestBody RegisterRequest register
+		);
+	
+	@Operation(
+			summary = "Delete a user by ID", 
+			description = "Endpoint to delete user as user admins users, return Api response with true data value if could delete the user", 
+			responses = {
+					@ApiResponse(
+							responseCode = "200", 
+							description = "Returns `userDTO` and `JWT` for the user auth",
+							content = @Content(schema = @Schema(implementation = UserDTO.class))),
+					@ApiResponse(
+							responseCode = "400", 
+							description = "Invalid request", 
+							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class))),
+					@ApiResponse(
+							responseCode = "404", 
+							description = "User not found", 
+							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class))),
+					@ApiResponse(
+							responseCode = "500", 
+							description = "Internal server error", 
+							content = @Content(schema = @Schema(implementation = commons.dto.ApiResponse.class)))
+					}
+			)
+	public ResponseEntity<commons.dto.ApiResponse> delete(
+			@RequestParam Long id
+		);
 	
 }
