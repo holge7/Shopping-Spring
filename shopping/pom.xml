@@ -13,7 +13,7 @@
 		<module>login-service</module>
 		<module>api-gateway</module>
 		<module>discovery-service</module>
-		<module>doc-service</module>
+		<module>manteiner-service</module>
 	</modules>
 	
 
