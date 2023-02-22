@@ -8,6 +8,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import commons.jwt.JwtAuthFilter;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -25,8 +27,8 @@ public class SecurityConfig {
         return http.cors().and()
         .csrf().disable()
         .authorizeHttpRequests()
-                .requestMatchers("/api/user/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**", "/actuator/health").permitAll()
-                .requestMatchers("/api/admin/user", "/api/admin/user/**").hasRole("ADMIN")
+		        .requestMatchers("/user" ,"/user/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**", "/actuator/health").permitAll()
+                .requestMatchers("/user/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             // Exceptions
             .and()

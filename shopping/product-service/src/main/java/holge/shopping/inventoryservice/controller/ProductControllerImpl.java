@@ -21,7 +21,7 @@ import holge.shopping.inventoryservice.service.ProductService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("api/v1/product")
+@RequestMapping("api/product")
 public class ProductControllerImpl implements ProductController {
 	
 	ProductService productService;

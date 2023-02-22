@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import commons.dto.ApiResponse;
+import holge.shopping.userservice.config.PathConstants;
 import holge.shopping.userservice.dto.RegisterRequest;
-import holge.shopping.userservice.service.UserService;
+import holge.shopping.userservice.service.UserServiceImpl;
 
 @RestController
-@RequestMapping("api/admin/user")
+@RequestMapping(PathConstants.API_RESOURCE_STRING+PathConstants.USER_RESOURCE_STRING + PathConstants.ADMIN_RESOURCE_STRING)
 public class UserControllerAdminImpl implements UserControllerAdmin {
-	UserService userService;
+	UserServiceImpl userService;
 	
-	public UserControllerAdminImpl(UserService userService) {
+	public UserControllerAdminImpl(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 	
@@ -43,8 +44,11 @@ public class UserControllerAdminImpl implements UserControllerAdmin {
 	public ResponseEntity<ApiResponse> delete(
 			@RequestParam Long id
 			) {
+		boolean result = userService.delete(id);
+		ApiResponse response = new ApiResponse(result, "", null);
+		
 		return new ResponseEntity<ApiResponse>(
-					userService.delete(id),
+					response,
 					HttpStatus.OK
 				);
 	}
