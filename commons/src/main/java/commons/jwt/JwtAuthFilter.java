@@ -1,8 +1,9 @@
-package holge.shopping.userservice.security;
+package commons.jwt;
+
+import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,19 +21,14 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import com.google.gson.Gson;
 
 import commons.dto.ApiResponse;
-import commons.jwt.JwtUtils;
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-
-import java.io.IOException;
-import java.util.HashMap;
-
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
-public class JwtAuthFilter extends OncePerRequestFilter {
+public class JwtAuthFilter extends OncePerRequestFilter{
+	
 	private static final Logger logger = LoggerFactory.getLogger(JwtAuthFilter.class);
 
     private JwtUtils jwtUtils;
