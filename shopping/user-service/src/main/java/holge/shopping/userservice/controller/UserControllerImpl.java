@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import commons.dto.ApiResponse;
+import holge.shopping.userservice.config.PathConstants;
 import holge.shopping.userservice.dto.LoginRequest;
 import holge.shopping.userservice.dto.RegisterRequest;
-import holge.shopping.userservice.service.UserService;
+import holge.shopping.userservice.service.UserServiceImpl;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping(PathConstants.API_RESOURCE_STRING+PathConstants.USER_RESOURCE_STRING)
 public class UserControllerImpl implements UserController{
 	
-	UserService userService;
+	UserServiceImpl userService;
 	
-	public UserControllerImpl(UserService userService) {
+	public UserControllerImpl(UserServiceImpl userService) {
 		this.userService = userService;
 	}
 
