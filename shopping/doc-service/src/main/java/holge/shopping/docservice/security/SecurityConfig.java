@@ -1,4 +1,4 @@
-package holge.shopping.userservice.security;
+package holge.shopping.docservice.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,8 +27,8 @@ public class SecurityConfig {
         return http.cors().and()
         .csrf().disable()
         .authorizeHttpRequests()
-		        .requestMatchers("/user" ,"/user/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**", "/actuator/health").permitAll()
-                .requestMatchers("/user/admin/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/doc", "/api/doc/**", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**", "/actuator/health").permitAll()
                 .anyRequest().authenticated()
             // Exceptions
             .and()
@@ -37,5 +37,4 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
             .build();
     }
-	
 }

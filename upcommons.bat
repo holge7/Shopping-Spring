@@ -8,10 +8,10 @@ cd .\shopping\user-service
 mvn install:install-file -Dfile=.\..\..\commons\target\commons-%VERSION%.jar -DgroupId=com -DartifactId=commons -Dversion="%VERSION%" -Dpackaging=jar -DgeneratePom=true
 cd ..
 
-cd .\shopping\api-gateway
+cd .\shopping\product-service
 mvn install:install-file -Dfile=.\..\commons\target\commons-%VERSION%.jar -DgroupId=com -DartifactId=commons -Dversion="%VERSION%" -Dpackaging=jar -DgeneratePom=true
 cd ..
 
-cd .\shopping\product-service
-mvn install:install-file -Dfile=.\..\..\commons\target\commons-%VERSION%.jar -DgroupId=com -DartifactId=commons -Dversion="%VERSION%" -Dpackaging=jar -DgeneratePom=true
+cd .\shopping\doc-service
+mvn install:install-file -Dfile=.\..\commons\target\commons-%VERSION%.jar -DgroupId=com -DartifactId=commons -Dversion="%VERSION%" -Dpackaging=jar -DgeneratePom=true
 cd ..

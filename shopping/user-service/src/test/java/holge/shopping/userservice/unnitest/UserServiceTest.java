@@ -30,7 +30,7 @@ import holge.shopping.userservice.exception.UserNotFoundException;
 import holge.shopping.userservice.mapper.UserMapper;
 import holge.shopping.userservice.repository.RolRepository;
 import holge.shopping.userservice.repository.UserRepository;
-import holge.shopping.userservice.service.UserService;
+import holge.shopping.userservice.service.UserServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class UserServiceTest {
@@ -39,7 +39,7 @@ public class UserServiceTest {
 	 * VARS
 	 */
 	
-	UserService userService;
+	UserServiceImpl userService;
     static Long id = 0L;
     static String email = "jorge@gmail.com";
     static String name = "Holge";
@@ -106,7 +106,7 @@ public class UserServiceTest {
         when(passwordEncoder.encode(password)).thenReturn(encodePassword);
         
         
-        userService = new UserService(userRepository, rolRepository, passwordEncoder, userMapper);
+        userService = new UserServiceImpl(userRepository, rolRepository, passwordEncoder, userMapper);
 		
 	}
 	
